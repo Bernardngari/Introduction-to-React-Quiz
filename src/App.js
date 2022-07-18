@@ -1,5 +1,5 @@
-import React from "react";
-import logo from './logo.svg';
+import React, {useEffect,useState} from "react";
+import {Logo,image}from './Logo.js';
 import './App.css';
 
 /**
@@ -12,26 +12,37 @@ const users = [
   { name: "Billy Doe", id: 3 }
 ];
 
-// comment this out after completion and uncomment code below it to proceed
-function Child() {
-  return <div>This is children content</div>;
-}
-/**
-  Challenge: Uncomment this code to complete quiz
 
-function Child() {
+//[=========comment this out after completion and uncomment code below it to proceed================]
+
+
+//function Child(){
+//  return <div className="child">This is children content</div>;
+//}
+
+
+
+//[=========Challenge: Uncomment this code to complete quiz=====================]
+
+function Child({updater}) {
   return (
     <>
-      <div>Child</div>
-      <button>Change Parent Value</button>
+      <div className="child">Child</div>
+      <button onClick={updater}>Change Parent Value</button>
     </>
   );
 }
 
-function Parent() {
+function Parent({hider}) {
   const [value, setValue] = React.useState(
     "I need to be updated from my child"
   );
+
+ const [showParent, setShowParent] = useState(true);
+ 
+function updateParent(){
+setValue("Bless you Mama!")
+}
 
   return (
     <>
@@ -42,39 +53,43 @@ function Parent() {
       </div>
 
       <div className="wrapper">
-        <Child />
+        <Child updater={updateParent}/>
       </div>
     </>
   );
 }
-Uncomment this to tackle quiz
-**/
+
+//[====================Uncomment this to tackle quiz=======================================]
+
 
 // Comment out after completion
-function Parent() {
-  return (
-    <div>
-      <h3>Parent Component</h3>
-    </div>
-  );
-}
+//function Parent({children}) {
+//  return (
+//    <div className="parent">
+//      <h3>Parent Component</h3>
+//      {children}
+//    </div>
+//  );
+//}
 // Comment above code after completion
 
 function App() {
-  const [] = React.useState(true);
+  
+const user = users.map((data)=><li key={data.id}>{data.name}</li>)
   return (
-    
     <>
     
-    <img src={logo} className="App-logo" alt="logo" />
+    <img src={image} style={{height:100}} className="App-logo" alt="logo" />
+    <Logo />
       <h3>User names</h3>
-      <ul></ul>
+      <ul>{user}</ul>
       <button>Hide Element Below</button>
 
       <div>Toggle Challenge</div>
       <Parent>
-      <Child />
-    </Parent>
+       <Child />
+      </Parent>
+      
     </>
   );
 }
